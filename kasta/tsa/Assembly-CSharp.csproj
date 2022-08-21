@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\FollowAsmera.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Textures\Font\KSX1001.txt" />
