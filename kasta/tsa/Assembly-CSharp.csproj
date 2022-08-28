@@ -56,8 +56,11 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\FollowAsmera.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\BulletCtrl.cs" />
+    <Compile Include="Assets\Scripts\RemoveBullet.cs" />
+    <Compile Include="Assets\Scripts\Firectrl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Textures\Font\KSX1001.txt" />
