@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\FollowAsmera.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\ExtinguishableFire.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleMenu.cs" />
+    <Compile Include="Assets\Scripts\BarrelCtrl.cs" />
     <Compile Include="Assets\EffectExamples\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleExamples.cs" />
@@ -69,7 +70,6 @@
     <Compile Include="Assets\Scripts\BulletCtrl.cs" />
     <Compile Include="Assets\Scripts\Firectrl.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\GunAim.cs" />
-    <Compile Include="Assets\Scripts\BarrelCtrl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Images\Font\KSX1001.txt" />
