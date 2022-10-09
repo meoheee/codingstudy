@@ -27,9 +27,9 @@ public class cam : MonoBehaviour
     void LateUpdate()
     {
         Vector3 pos = targetTr.position + (-targetTr.forward * distance) + (Vector3.up * height);
-        camTr.LookAt(targetTr.position);
+       
         camTr.position = Vector3.SmoothDamp(camTr.position, pos, ref velocity, damping);
-        
+        camTr.LookAt(targetTr.position);
 
 
     }
