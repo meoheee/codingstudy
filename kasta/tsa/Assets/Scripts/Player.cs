@@ -9,13 +9,22 @@ public class Player : MonoBehaviour
 
     public float moveSpeed;
     public float turnSpeed;
+
+    private readonly float initHp = 100.0f;
+    public float currentHp;
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
+        currentHp = initHp;
+
         tr = GetComponent<Transform>();
         anim = GetComponent<Animation>();
 
         anim.Play("Idle");
+
+        turnSpeed = 0.0f;
+        yield return new WaitForSeconds(0.3f);
+        turnSpeed = 80.0f;
     }
 
     // Update is called once per frame
@@ -25,8 +34,9 @@ public class Player : MonoBehaviour
         float v =Input.GetAxis("Vertical");
         float r = Input.GetAxis("Mouse X");
 
-        Debug.Log("h = " + h);
-        Debug.Log("v = " + v);
+        //asd
+        //Debug.Log("h = " + h);
+        //Debug.Log("v = " + v);
 
         Vector3 moveDir = (Vector3.forward * v) + (Vector3.right * h);
 
@@ -44,5 +54,23 @@ public class Player : MonoBehaviour
         else if (v <= -0.1f) anim.CrossFade("RunL", 0.25f);
         else anim.CrossFade("Idle", 0.25f);
 
+    }
+
+    void OnTriggerEnter(Collider coll)
+    {
+        if (currentHp >= 0.0f && coll.CompareTag("PUNCH"))
+        {
+            currentHp -= 10.0f;
+            Debug.Log($"Player hp = {currentHp / initHp}");
+            if(currentHp <= 0.0f)
+            {
+                playerDie();
+            }
+        }
+    }
+
+    void playerDie()
+    {
+        Debug.Log("player Die~.~");
     }
 }

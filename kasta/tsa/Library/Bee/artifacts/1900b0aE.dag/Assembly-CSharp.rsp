@@ -367,6 +367,7 @@
 "Assets/Scripts/Firectrl.cs"
 "Assets/Scripts/FollowAsmera.cs"
 "Assets/Scripts/Monsster.cs"
+"Assets/Scripts/Monsterctrl.cs"
 "Assets/Scripts/Player.cs"
 "Assets/Scripts/RemoveBullet.cs"
 -langversion:9.0

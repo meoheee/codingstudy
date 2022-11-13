@@ -60,6 +60,7 @@
     <Compile Include="Assets\EffectExamples\Shared\Scripts\DecalDestroyer.cs" />
     <Compile Include="Assets\Scripts\Monsster.cs" />
     <Compile Include="Assets\Scripts\FollowAsmera.cs" />
+    <Compile Include="Assets\Scripts\Monsterctrl.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\ExtinguishableFire.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleMenu.cs" />
     <Compile Include="Assets\Scripts\BarrelCtrl.cs" />
