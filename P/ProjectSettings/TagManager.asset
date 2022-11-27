@@ -5,15 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - bullet
+  - PLAYER
+  - Punch
+  - MONSTER
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - BARREL
   - Water
   - UI
-  - 
-  - 
+  - MONSTER_BODY
+  - MONSTER_PUNCH
   - 
   - 
   - 

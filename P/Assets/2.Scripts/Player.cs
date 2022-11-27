@@ -10,14 +10,26 @@ public class Player : MonoBehaviour
     public float moveSpeed = 10.0f;
     public float turnSpeed = 300.0f;
     
+    private readonly float initHp = 100.0f;
+    public float currentHp;
+
+    public delegate void PlayerDieHandler();
+    public static event PlayerDieHandler OnPlayerDie;
+    
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
+        currentHp = initHp;
+
         tr = GetComponent<Transform>();    
         anim = GetComponent<Animation>();
 
         anim.Play("Idle");
+
+        turnSpeed = 0.0f;
+        yield return new WaitForSeconds(0.3f);
+        turnSpeed = 80.0f;
     }
 
     // Update is called once per frame
@@ -45,4 +57,25 @@ public class Player : MonoBehaviour
         else if (h <= -0.1f) anim.CrossFade("RunL", 0.025f);
         else anim.CrossFade("Idle", 0.25f);
     }
+
+    void OnTriggerEnter(Collider coll)
+    {
+        if (currentHp >= 0.0f && coll.CompareTag("Punch"))
+        {
+            currentHp -= 10.0f;
+            Debug.Log($"Player hp = {currentHp/initHp}");
+            if (currentHp <= 0.0f)
+            {
+                PlayerDie();
+            }
+        }
+    }
+
+    void PlayerDie()
+    {
+        Debug.Log("Player Die~.~");
+        
+        OnPlayerDie();
+    }
+
 }
