@@ -7,7 +7,7 @@ public class Monsster : MonoBehaviour
 {
     public enum State
     {
-        IDLE, PATROL, TRACE, ATTACK, DIE
+        IDLE, TRACE, ATTACK, DIE
     }
     public State state = State.IDLE;
     public float traceDist = 10.0f;
@@ -22,6 +22,11 @@ public class Monsster : MonoBehaviour
     private readonly int hashTrace = Animator.StringToHash("isTrace");
     private readonly int hashAttack = Animator.StringToHash("isAttack");
     private readonly int hashHit = Animator.StringToHash("hit");
+    private readonly int hashPlayerDie = Animator.StringToHash("PlayerDie");
+    private readonly int hashSpeed = Animator.StringToHash("Speed");
+    private readonly int hashDie = Animator.StringToHash("Die");
+
+    private int hp = 100;
 
     private GameObject bloodEffect;
     // Start is called before the first frame update
@@ -42,6 +47,7 @@ public class Monsster : MonoBehaviour
         while (!isDie)
         {
             yield return new WaitForSeconds(0.3f);
+            if (state == State.DIE) yield break;
             float distance = Vector3.Distance(playerTr.position, monsterTr.position);
             if (distance < attackDist)
             {
@@ -79,6 +85,10 @@ public class Monsster : MonoBehaviour
                     anim.SetBool(hashAttack, true);
                     break;
                 case State.DIE:
+                    isDie = true;
+                    agent.isStopped = true;
+                    anim.SetTrigger(hashDie);
+                    GetComponent<CapsuleCollider>().enabled = false;
                     break;
             }
             yield return new WaitForSeconds(0.3f);
@@ -93,6 +103,12 @@ public class Monsster : MonoBehaviour
             Vector3 pos = coll.GetContact(0).point;
             Quaternion rot = Quaternion.LookRotation(-coll.GetContact(0).normal);
             showBloodEffect(pos, rot);
+            hp -= 10;
+            //Debug.Log(hp);
+            if (hp <= 0)
+            {
+                state = State.DIE;
+            }
         }
     }
 
@@ -113,5 +129,24 @@ public class Monsster : MonoBehaviour
                 Gizmos.color = Color.red;
                 Gizmos.DrawWireSphere(transform.position, traceDist);
         }
+    }
+    void OnTriggerEnter(Collider coll)
+    {
+        Debug.Log(coll.gameObject.name);
+    }
+    void OnPlayerDie()
+    {
+        StopAllCoroutines();
+        agent.isStopped = true;
+        anim.SetFloat(hashSpeed, Random.Range(0.8f, 1.2f));
+        anim.SetTrigger(hashPlayerDie);
+    }
+    void OnEnable()
+    {
+        Player.OnPlayerDie += this.OnPlayerDie;
+    }
+    void OnDisable()
+    {
+        Player.OnPlayerDie -= this.OnPlayerDie;
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -12,10 +13,16 @@ public class Player : MonoBehaviour
 
     private readonly float initHp = 100.0f;
     public float currentHp;
+    public Image hpBar;
+
+    public delegate void PlayerDieHandler();
+    public static event PlayerDieHandler OnPlayerDie; 
     // Start is called before the first frame update
     IEnumerator Start()
     {
+        hpBar = GameObject.FindGameObjectWithTag("HPBAR")?.GetComponent<Image>();
         currentHp = initHp;
+        DisplayHealth();
 
         tr = GetComponent<Transform>();
         anim = GetComponent<Animation>();
@@ -61,6 +68,7 @@ public class Player : MonoBehaviour
         if (currentHp >= 0.0f && coll.CompareTag("PUNCH"))
         {
             currentHp -= 10.0f;
+            DisplayHealth();
             Debug.Log($"Player hp = {currentHp / initHp}");
             if(currentHp <= 0.0f)
             {
@@ -72,5 +80,12 @@ public class Player : MonoBehaviour
     void playerDie()
     {
         Debug.Log("player Die~.~");
+   
+        OnPlayerDie();
+
+    }
+    void DisplayHealth()
+    {
+        hpBar.fillAmount = currentHp / initHp;
     }
 }
