@@ -30,7 +30,7 @@ public class Monsster : MonoBehaviour
 
     private GameObject bloodEffect;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         monsterTr = GetComponent<Transform>();
         playerTr = GameObject.FindWithTag("PLAYER").GetComponent<Transform>();
@@ -39,8 +39,7 @@ public class Monsster : MonoBehaviour
         bloodEffect = Resources.Load<GameObject>("BloodSprayEffect");
 
         //agent.destination = playerTr.position;
-        StartCoroutine(CheckMonsterState());
-        StartCoroutine(MonsterAction());
+
     }
     IEnumerator CheckMonsterState()
     {
@@ -89,6 +88,16 @@ public class Monsster : MonoBehaviour
                     agent.isStopped = true;
                     anim.SetTrigger(hashDie);
                     GetComponent<CapsuleCollider>().enabled = false;
+
+                    yield return new WaitForSeconds(3.0f);
+
+                    hp = 100;
+                    isDie = false;
+                    GetComponent<CapsuleCollider>().enabled = true;
+                    this.gameObject.SetActive(false);
+
+
+
                     break;
             }
             yield return new WaitForSeconds(0.3f);
@@ -144,6 +153,8 @@ public class Monsster : MonoBehaviour
     void OnEnable()
     {
         Player.OnPlayerDie += this.OnPlayerDie;
+        StartCoroutine(CheckMonsterState());
+        StartCoroutine(MonsterAction());
     }
     void OnDisable()
     {

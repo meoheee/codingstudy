@@ -522,7 +522,9 @@ Animator:
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tFrom animation clip 'mixamo.com'"
   m_HasTransformHierarchy: 0
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -552,8 +554,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 879f7d054ed433c438561be9cdf48084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 3
-  traceDist: 10
+  state: 0
+  traceDist: 40
   attackDist: 2
   isDie: 0
 --- !u!195 &332307346198778426

@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     private readonly float initHp = 100.0f;
     public float currentHp;
-    public Image hpBar;
+    private Image hpBar;
 
     public delegate void PlayerDieHandler();
     public static event PlayerDieHandler OnPlayerDie; 
@@ -82,7 +82,8 @@ public class Player : MonoBehaviour
         Debug.Log("player Die~.~");
    
         OnPlayerDie();
-
+        //GameObject.Find("GameMgr").GetComponent<GameManeser>().IsGameOver = true;
+        GameManeser.instance.IsGameOver = true;
     }
     void DisplayHealth()
     {
