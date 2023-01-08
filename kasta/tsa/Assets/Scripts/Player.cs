@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
 
         turnSpeed = 0.0f;
         yield return new WaitForSeconds(0.3f);
-        turnSpeed = 80.0f;
+        turnSpeed = 160.0f;
     }
 
     // Update is called once per frame
@@ -82,6 +82,7 @@ public class Player : MonoBehaviour
         Debug.Log("player Die~.~");
    
         OnPlayerDie();
+
         //GameObject.Find("GameMgr").GetComponent<GameManeser>().IsGameOver = true;
         GameManeser.instance.IsGameOver = true;
     }

@@ -30,7 +30,7 @@ public class FollowAsmera : MonoBehaviour
 
         Vector3 pos= transform.position = targetTr.position + (-targetTr.forward * distance)+(Vector3.up* height);
         camTr.position = Vector3.SmoothDamp(camTr.position, pos, ref velocity, damping);
-        camTr.LookAt(targetTr.position);
+        camTr.LookAt(targetTr.position+(targetTr.up*targetOffset));
 
     }
 }

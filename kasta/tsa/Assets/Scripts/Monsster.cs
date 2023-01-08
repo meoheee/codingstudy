@@ -42,6 +42,7 @@ public class Monsster : MonoBehaviour
 
     }
     IEnumerator CheckMonsterState()
+        //적인식
     {
         while (!isDie)
         {
@@ -90,7 +91,7 @@ public class Monsster : MonoBehaviour
                     GetComponent<CapsuleCollider>().enabled = false;
 
                     yield return new WaitForSeconds(3.0f);
-
+                    state = State.IDLE;
                     hp = 100;
                     isDie = false;
                     GetComponent<CapsuleCollider>().enabled = true;
@@ -117,6 +118,7 @@ public class Monsster : MonoBehaviour
             if (hp <= 0)
             {
                 state = State.DIE;
+                if (hp==0) GameManeser.instance.DisplayScore(50);
             }
         }
     }
