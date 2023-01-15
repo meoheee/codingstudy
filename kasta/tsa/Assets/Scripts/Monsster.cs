@@ -109,6 +109,7 @@ public class Monsster : MonoBehaviour
         if (coll.collider.CompareTag("Bullet"))
         {
             Destroy(coll.gameObject);
+            /*
             anim.SetTrigger(hashHit);
             Vector3 pos = coll.GetContact(0).point;
             Quaternion rot = Quaternion.LookRotation(-coll.GetContact(0).normal);
@@ -120,6 +121,22 @@ public class Monsster : MonoBehaviour
                 state = State.DIE;
                 if (hp==0) GameManeser.instance.DisplayScore(50);
             }
+            */
+
+        }
+    }
+
+    public void OnDamage(Vector3 pos,Vector3 normal)
+    {
+        anim.SetTrigger(hashHit);
+        Quaternion rot = Quaternion.LookRotation(normal);
+        showBloodEffect(pos, rot);
+        hp -= 10;
+        //Debug.Log(hp);
+        if (hp <= 0)
+        {
+            state = State.DIE;
+            if (hp == 0) GameManeser.instance.DisplayScore(50);
         }
     }
 

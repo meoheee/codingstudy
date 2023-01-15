@@ -10,20 +10,50 @@ public class Firectrl : MonoBehaviour
     public AudioClip firesfx;
 
     private new AudioSource audio;
+    private MeshRenderer muzzleFlash;
+
+    private RaycastHit hit;
     // Start is called before the first frame update
     void Start()
     {
         audio = GetComponent<AudioSource>();
+        muzzleFlash = FP.GetComponentInChildren<MeshRenderer>();
+        muzzleFlash.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0)) Fire();
+        Debug.DrawRay(FP.position, FP.forward * 10.0f, Color.green);
+        if (Input.GetMouseButton(0))
+        {
+            Fire();
+            if (Physics.Raycast(FP.position, FP.forward, out hit, 10.0f, 1 << 6))
+            {
+                Debug.Log($"Hit = {hit.transform.name}");
+                hit.transform.GetComponent<Monsster>()?.OnDamage(hit.point, hit.normal);
+            }
+        }
     }
     void Fire()
     {
-        Instantiate(bullet, FP.position, FP.rotation);
+        //Instantiate(bullet, FP.position, FP.rotation);
         audio.PlayOneShot(firesfx,1.0f);
+        StartCoroutine(ShowMuzzleFlash());
     }
+    IEnumerator ShowMuzzleFlash()
+    {
+        Vector2 offset = new Vector2(Random.Range(0,2), Random.Range(0,2))*0.5f;
+        muzzleFlash.material.mainTextureOffset = offset;
+
+        float angle = Random.Range(0, 360);
+        muzzleFlash.transform.localRotation = Quaternion.Euler(0, 0, angle);
+
+        float scale = Random.Range(1.0f, 2.0f);
+        muzzleFlash.transform.localScale = Vector3.one * scale;
+        muzzleFlash.enabled = true;
+        yield return new WaitForSeconds(0.2f);
+        muzzleFlash.enabled = false;
+    }
+
 }
