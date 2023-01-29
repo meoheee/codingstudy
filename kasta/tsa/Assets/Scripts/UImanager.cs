@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class UImanager : MonoBehaviour
 {
@@ -13,7 +15,7 @@ public class UImanager : MonoBehaviour
     public UnityAction action;
     void Start()
     {
-        action = () => OnButtonClick(startButton.name);
+        action = () => OnStartClick();
         startButton.onClick.AddListener(action);
         optionButton.onClick.AddListener(delegate { OnButtonClick(optionButton.name); });
         shopButton.onClick.AddListener(() => OnButtonClick(shopButton.name));
@@ -21,5 +23,10 @@ public class UImanager : MonoBehaviour
     public void OnButtonClick(string msg)
     {
         Debug.Log($"Click Button{msg}");
+    }
+    public void OnStartClick()
+    {
+        SceneManager.LoadScene("level1");
+        SceneManager.LoadScene("play",LoadSceneMode.Additive);
     }
 }
